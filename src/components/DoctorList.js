@@ -36,6 +36,7 @@ const DoctorList = () => {
             <th>Name</th>
             <th>Email</th>
             <th>Specialization</th>
+            <th>Contact Number</th>
             <th>Actions</th>
           </tr>
         </thead>
@@ -45,6 +46,7 @@ const DoctorList = () => {
               <td>{doctor.firstName} {doctor.lastName}</td>
               <td>{doctor.email}</td>
               <td>{doctor.specialization}</td>
+              <td>{doctor.contactNumber}</td>
               <td>
                 <Link to={`/edit-doctor/${doctor.id}`} className="btn btn-blue">Edit</Link>
                 <button onClick={() => deleteDoctor(doctor.id)} className="btn btn-red">Delete</button>

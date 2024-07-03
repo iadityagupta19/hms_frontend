@@ -7,7 +7,7 @@ import DoctorList from './components/DoctorList';
 import AddDoctor from './components/AddDoctor';
 import EditDoctor from './components/EditDoctor';
 import AppointmentList from './components/AppointmentList';
-import AddAppointment from './components/AddAppointment';
+import AppointmentForm from './components/AppointmentForm';
 import EditAppointment from './components/EditAppointment';
 import './App.css';
 
@@ -28,7 +28,7 @@ function App() {
           <Route path="/add-doctor" element={<AddDoctor />} />
           <Route path="/edit-doctor/:id" element={<EditDoctor />} />
           <Route path="/appointments" element={<AppointmentList />} />
-          <Route path="/add-appointment" element={<AddAppointment />} />
+          <Route path="/add-appointment" element={<AppointmentForm />} />
           <Route path="/edit-appointment/:id" element={<EditAppointment />} />
         </Routes>
       </div>

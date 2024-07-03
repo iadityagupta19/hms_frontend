@@ -52,6 +52,10 @@ const EditDoctor = () => {
           <input type="text" name="lastName" value={doctor.lastName} onChange={handleChange} required />
         </div>
         <div className="form-group">
+          <label>Contact Number</label>
+          <input type="text" name="contactNumber" value={doctor.contactNumber} onChange={handleChange} required />
+        </div>
+        <div className="form-group">
           <label>Email</label>
           <input type="email" name="email" value={doctor.email} onChange={handleChange} required />
         </div>
