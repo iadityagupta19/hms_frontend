@@ -1,16 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import axios from 'axios';
-import PatientForm from './PatientForm';
 
 const PatientList = () => {
   const [patients, setPatients] = useState([]);
-  const [selectedPatient, setSelectedPatient] = useState(null);
 
   useEffect(() => {
-    fetchPatients();
-  }, []);
-
-  const fetchPatients = () => {
     axios.get('http://localhost:8080/api/patients')
       .then(response => {
         setPatients(response.data);
@@ -18,40 +13,31 @@ const PatientList = () => {
       .catch(error => {
         console.error('There was an error fetching the patients!', error);
       });
-  };
+  }, []);
 
-  const handleEdit = (patient) => {
-    setSelectedPatient(patient);
-  };
-
-  const handleDelete = (id) => {
+  const deletePatient = (id) => {
     axios.delete(`http://localhost:8080/api/patients/${id}`)
-      .then(() => {
-        fetchPatients();
+      .then(response => {
+        setPatients(patients.filter(patient => patient.id !== id));
       })
       .catch(error => {
         console.error('There was an error deleting the patient!', error);
       });
   };
 
-  const handleSave = (savedPatient) => {
-    fetchPatients();
-    setSelectedPatient(null);
-  };
-
   return (
-    <div>
-      <h2>Patient List</h2>
+    <div className="list-container">
+      <h2>Patients List</h2>
+      <Link to="/add-patient" className="btn">Add Patient</Link>
       <ul>
         {patients.map(patient => (
           <li key={patient.id}>
-            {patient.firstName} {patient.lastName} - {patient.email}
-            <button onClick={() => handleEdit(patient)}>Edit</button>
-            <button onClick={() => handleDelete(patient.id)}>Delete</button>
+            {patient.firstName} {patient.lastName}
+            <Link to={`/edit-patient/${patient.id}`}>Edit</Link>
+            <button onClick={() => deletePatient(patient.id)}>Delete</button>
           </li>
         ))}
       </ul>
-      <PatientForm patient={selectedPatient} onSave={handleSave} />
     </div>
   );
 };
